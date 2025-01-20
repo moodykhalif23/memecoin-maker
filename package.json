@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
+    "@metaplex-foundation/mpl-toolbox": "^0.9.4",
+    "@metaplex-foundation/umi": "0.9.2",
+    "@metaplex-foundation/umi-bundle-defaults": "0.9.2",
+    "@metaplex-foundation/umi-uploader-irys": "0.9.2"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "keygen": "node keygen.js"
+  },
+  "name": "memecoin-maker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT"
+}
