@@ -1,18 +1,28 @@
 # memecoin-maker
 
-Generate a memecoin for Solana.
+Solana memecoin maker.
 
 ### Installation
+Clone repository. 
+```
+git clone https://github.com/techleadhd/memecoin-maker.git
+```
+
+Install dependencies. 
+```
 yarn install
+```
 
 ### Instructions
 
-Put your wallet private key and wallet address into `keygen.js`. Run the following to generate `keypair.json`.
+The code needs a Solana wallet to create the memecoin.
+Set up any wallet and copy/paste the Private Key into `keygen.js`.
+Run the following to generate the `keypair.json` credentials.
 ```
 yarn keygen
 ```
 
-Creating a memecoin is three steps.
+#### Creating the memecoin
 1. Upload image.
 2. Upload metadata.
 3. Mint token
