@@ -42,8 +42,7 @@ const uploadMetadata = async (imageUri) => {
     symbol: "TL",
     description: "",
     image: imageUri,
-    "website": "https://www.youtube.com/techlead",
-    "twitter": "https://x.com/techleadhd",
+    "twitter": "https://x.com/techleadcoin",
   };
   console.log("Uploading metadata to Arweave");
   const uri = await umi.uploader.uploadJson(metadata).catch((err) => {
@@ -136,7 +135,7 @@ const loadUmi = () => {
 
 // Step 2: Upload metadata
 // const metadataUri = await uploadMetadata(imageUri);
-// const metadataUri = 'https://arweave.net/vFkLt4NG-kVE3INckdkxWWi5Y5HRZkaGvToXJ7rOsoU';
+// const metadataUri = 'https://arweave.net/f4KeQgJgWrLvE0WZY1Yl2NoazO3VYkD5EgY9C0z5k6w';
 
 // Step 3: Mint token
 // await mintToken(imageUri, metadataUri);
