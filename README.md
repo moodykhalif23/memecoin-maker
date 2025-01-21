@@ -1,4 +1,4 @@
-# memecoin-maker
+# Solana Memecoin Maker
 
 Solana memecoin maker.
 
