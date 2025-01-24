@@ -22,6 +22,9 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 
+const coinName = "TechLead";
+const coinSymbol = "TL";
+
 // Upload 'image.jpg' to Arweave.
 const uploadImage = async () => {
   const umi = loadUmi();
@@ -31,6 +34,7 @@ const uploadImage = async () => {
   console.log("Upload price", await umi.uploader.getUploadPrice([imageFile]));
   const imageUris = await umi.uploader.upload([imageFile]);
   console.log(imageUris);
+  return imageUris[0];
 };
 
 // Upload metadata to Arweave.
@@ -38,8 +42,8 @@ const uploadMetadata = async (imageUri) => {
   const umi = loadUmi();
 
   const metadata = {
-    name: "TechLead",
-    symbol: "TL",
+    name: coinName,
+    symbol: coinSymbol,
     description: "",
     image: imageUri,
     "twitter": "https://x.com/techleadcoin",
@@ -49,6 +53,7 @@ const uploadMetadata = async (imageUri) => {
     throw new Error(err);
   });
   console.log(uri);
+  return uri;
 };
 
 const mintToken = async (imageUri, metadataUri) => {
@@ -61,8 +66,8 @@ const mintToken = async (imageUri, metadataUri) => {
   const mintSigner = generateSigner(umi);
   const createFungibleIx = createFungible(umi, {
     mint: mintSigner,
-    name: "TechLead",
-    symbol: "TL",
+    name: coinName,
+    symbol: coinSymbol,
     uri: metadataUri,
     sellerFeeBasisPoints: percentAmount(0),
     decimals: numDecimals,
