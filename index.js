@@ -134,13 +134,16 @@ const loadUmi = () => {
   return umi;
 };
 
-// Step 1: Upload image
+// Step 1: Upload image (costs 0.00001 SOL / $0.01)
 // const imageUri = await uploadImage();
 // const imageUri = 'https://arweave.net/uv3P7skZVsJtJVHa2N64OXBafkFmSFJY23TSKj9-_gE';
 
-// Step 2: Upload metadata
+// Step 2: Upload metadata (costs 0.00001 SOL / $0.01)
 // const metadataUri = await uploadMetadata(imageUri);
 // const metadataUri = 'https://arweave.net/f4KeQgJgWrLvE0WZY1Yl2NoazO3VYkD5EgY9C0z5k6w';
 
-// Step 3: Mint token
+// Step 3: Mint token (costs 0.02 SOL / $5)
 // await mintToken(imageUri, metadataUri);
+
+// Step 4: (optional) Deploy liquidity to Meteora.ag. (costs .25 SOL / $50-100 depending on range)
+// Step 5: (optional) Update token info on sites like https://marketplace.dexscreener.com/product/token-info. (costs $300)
