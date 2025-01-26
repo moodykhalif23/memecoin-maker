@@ -142,7 +142,7 @@ const loadUmi = () => {
 // const metadataUri = await uploadMetadata(imageUri);
 // const metadataUri = 'https://arweave.net/f4KeQgJgWrLvE0WZY1Yl2NoazO3VYkD5EgY9C0z5k6w';
 
-// Step 3: Mint token (costs 0.02 SOL / $5)
+// Step 3: Mint token (costs 0.02 SOL / $5). This step may timeout and appear to "error", but check your solscan account to see if the token is created before re-running it. Increasing the 'setComputeUnitPrice' would make it more reliable.
 // await mintToken(imageUri, metadataUri);
 
 // Step 4: (optional) Deploy liquidity to Meteora.ag. (costs .25 SOL / $50-100 depending on range)
