@@ -22,8 +22,8 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 
-const coinName = "TechLead";
-const coinSymbol = "TL";
+const coinName = "sonko coin";
+const coinSymbol = "scn";
 
 // Upload 'image.jpg' to Arweave.
 const uploadImage = async () => {
@@ -44,9 +44,9 @@ const uploadMetadata = async (imageUri) => {
   const metadata = {
     name: coinName,
     symbol: coinSymbol,
-    description: "",
+    description: "The ultimate memecoin for the sonko community! Join the revolution and ride the wave to the moon! 🚀",
     image: imageUri,
-    "twitter": "https://x.com/techleadcoin",
+    "twitter": "https://x.com/LYNGrind",
   };
   console.log("Uploading metadata to Arweave");
   const uri = await umi.uploader.uploadJson(metadata).catch((err) => {
@@ -134,16 +134,39 @@ const loadUmi = () => {
   return umi;
 };
 
-// Step 1: Upload image (costs 0.00001 SOL / $0.01)
-// const imageUri = await uploadImage();
-// const imageUri = 'https://arweave.net/uv3P7skZVsJtJVHa2N64OXBafkFmSFJY23TSKj9-_gE';
-
-// Step 2: Upload metadata (costs 0.00001 SOL / $0.01)
-// const metadataUri = await uploadMetadata(imageUri);
-// const metadataUri = 'https://arweave.net/f4KeQgJgWrLvE0WZY1Yl2NoazO3VYkD5EgY9C0z5k6w';
-
-// Step 3: Mint token (costs 0.02 SOL / $5). This step may timeout and appear to "error", but check your solscan account to see if the token is created before re-running it. Increasing the 'setComputeUnitPrice' would make it more reliable.
-// await mintToken(imageUri, metadataUri);
-
 // Step 4: (optional) Deploy liquidity to Meteora.ag. (costs .25 SOL / $50-100 depending on range)
 // Step 5: (optional) Update token info on sites like https://marketplace.dexscreener.com/product/token-info. (costs $300)
+
+// Main execution function
+const main = async () => {
+  try {
+    console.log('🚀 Starting Sonko Coin Creation Process...\n');
+    
+    // Step 1: Upload image (costs 0.00001 SOL / $0.01)
+    console.log('📸 Step 1: Uploading image to Arweave...');
+    const imageUri = await uploadImage();
+    console.log('✅ Image uploaded successfully!\n');
+    
+    // Step 2: Upload metadata (costs 0.00001 SOL / $0.01)
+    console.log('📝 Step 2: Uploading metadata to Arweave...');
+    const metadataUri = await uploadMetadata(imageUri);
+    console.log('✅ Metadata uploaded successfully!\n');
+    
+    // Step 3: Mint token (costs 0.02 SOL / $5)
+    console.log('🪙 Step 3: Minting Sonko Coin...');
+    await mintToken(imageUri, metadataUri);
+    console.log('✅ Sonko Coin minted successfully!\n');
+    
+    console.log('🎉 CONGRATULATIONS! Your Sonko Coin has been created successfully!');
+    console.log('📊 Next steps:');
+    console.log('   - Add liquidity to DEX (like Raydium, Orca)');
+    console.log('   - List on token aggregators');
+    console.log('   - Market your coin on social media');
+    
+  } catch (error) {
+    console.error('❌ Error during memecoin creation:', error);
+  }
+};
+
+// Run the main function
+main();
