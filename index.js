@@ -22,6 +22,18 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 
+// Apply CSV-parse module patch if needed
+try {
+  // This is just a check to see if the module is already patched
+  require('@irys/sdk/build/esm/node/upload.js');
+} catch (error) {
+  if (error.code === 'ERR_REQUIRE_ESM' || 
+      (error.message && error.message.includes("The requested module 'csv-parse' does not provide an export named 'default'"))) {
+    console.log("Applying CSV module patch...");
+    // The patch will be automatically applied when using our import system
+  }
+}
+
 const coinName = "sonko coin";
 const coinSymbol = "scn";
 
@@ -29,12 +41,38 @@ const coinSymbol = "scn";
 const uploadImage = async () => {
   const umi = loadUmi();
 
-  console.log("Uploading image to Arweave");
-  const imageFile = fs.readFileSync("./image.jpg");
-  console.log("Upload price", await umi.uploader.getUploadPrice([imageFile]));
-  const imageUris = await umi.uploader.upload([imageFile]);
-  console.log(imageUris);
-  return imageUris[0];
+  try {
+    console.log("Uploading image to Arweave");
+    const imageFile = fs.readFileSync("./image.jpg");
+    
+    // Check the wallet balance first - using the Solana Web3.js connection
+    // We need to extract the Solana connection from Umi
+    const { Connection } = await import('@solana/web3.js');
+    const connection = new Connection('https://api.mainnet-beta.solana.com');
+    const balance = await connection.getBalance(umi.identity.publicKey);
+    console.log(`Current wallet balance: ${balance / 1e9} SOL`);
+    
+    const uploadPrice = await umi.uploader.getUploadPrice([imageFile]);
+    console.log(`Upload price: ${Number(uploadPrice.basisPoints) / Math.pow(10, uploadPrice.decimals)} ${uploadPrice.identifier}`);
+    
+    if (balance < Number(uploadPrice.basisPoints) * 1.1) { // Add 10% buffer for transaction fees
+      throw new Error(`Insufficient balance. You need at least ${Number(uploadPrice.basisPoints) / Math.pow(10, uploadPrice.decimals) * 1.1} SOL, but you only have ${balance / 1e9} SOL.`);
+    }
+    
+    const imageUris = await umi.uploader.upload([imageFile]);
+    console.log(imageUris);
+    return imageUris[0];
+  } catch (error) {
+    if (error.message && (
+        error.message.includes("Attempt to debit an account but found no record of a prior credit") ||
+        error.message.includes("Insufficient balance")
+    )) {
+      console.error("ERROR: Your wallet doesn't have enough SOL to pay for the upload.");
+      console.error("Please fund your wallet with SOL before continuing.");
+      console.error(`Wallet address: ${umi.identity.publicKey}`);
+    }
+    throw error;
+  }
 };
 
 // Upload metadata to Arweave.

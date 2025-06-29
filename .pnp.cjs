@@ -40,7 +40,7 @@ const RAW_RUNTIME_STATE =
           ["bn.js", "npm:5.2.2"],\
           ["borsh", "npm:0.7.0"],\
           ["bs58", "npm:5.0.0"],\
-          ["csv-parse", "npm:5.6.0"],\
+          ["csv-parse", "npm:4.16.3"],\
           ["csv-stringify", "npm:6.5.2"],\
           ["js-sha3", "npm:0.9.3"],\
           ["memecoin-maker", "workspace:."],\
@@ -2186,13 +2186,6 @@ const RAW_RUNTIME_STATE =
           ["csv-parse", "npm:4.16.3"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:5.6.0", {\
-        "packageLocation": "../AppData/Local/Yarn/Berry/cache/csv-parse-npm-5.6.0-ac425c1790-10c0.zip/node_modules/csv-parse/",\
-        "packageDependencies": [\
-          ["csv-parse", "npm:5.6.0"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["csv-stringify", [\
@@ -3190,7 +3183,7 @@ const RAW_RUNTIME_STATE =
           ["bn.js", "npm:5.2.2"],\
           ["borsh", "npm:0.7.0"],\
           ["bs58", "npm:5.0.0"],\
-          ["csv-parse", "npm:5.6.0"],\
+          ["csv-parse", "npm:4.16.3"],\
           ["csv-stringify", "npm:6.5.2"],\
           ["js-sha3", "npm:0.9.3"],\
           ["memecoin-maker", "workspace:."],\
