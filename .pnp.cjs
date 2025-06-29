@@ -35,6 +35,7 @@ const RAW_RUNTIME_STATE =
           ["@metaplex-foundation/umi-bundle-defaults", "virtual:1331dfab01e91e7053fbcbfbecfc0610afcd171bcbd88cbca8d5c249b3509ae9d329342c68b5d02bce56c303063c0d72a0fe4b109b97ea78a40621fea678ee52#npm:0.9.2"],\
           ["@metaplex-foundation/umi-uploader-irys", "virtual:1331dfab01e91e7053fbcbfbecfc0610afcd171bcbd88cbca8d5c249b3509ae9d329342c68b5d02bce56c303063c0d72a0fe4b109b97ea78a40621fea678ee52#npm:0.9.2"],\
           ["@solana/web3.js", "npm:1.98.2"],\
+          ["arbundles", "npm:0.11.2"],\
           ["axios", "npm:1.10.0"],\
           ["bn.js", "npm:5.2.2"],\
           ["borsh", "npm:0.7.0"],\
@@ -1580,6 +1581,30 @@ const RAW_RUNTIME_STATE =
           ["@randlabs/myalgo-connect", "npm:1.4.2"],\
           ["algosdk", "npm:1.24.1"],\
           ["arbundles", "npm:0.10.1"],\
+          ["arweave-stream-tx", "virtual:380de38af4152f770a75a7c229b6e20f80e7ee3ef9ea049609fbf13c1c9fee314c8130be409beab785278c8e37614d7446c06edb8fca1b15aa694bde253901b8#npm:1.2.2"],\
+          ["base64url", "npm:3.0.1"],\
+          ["bs58", "npm:4.0.1"],\
+          ["keccak", "npm:3.0.4"],\
+          ["multistream", "npm:4.1.0"],\
+          ["secp256k1", "npm:5.0.1"],\
+          ["tmp-promise", "npm:3.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:0.11.2", {\
+        "packageLocation": "../AppData/Local/Yarn/Berry/cache/arbundles-npm-0.11.2-17fc408fab-10c0.zip/node_modules/arbundles/",\
+        "packageDependencies": [\
+          ["@ethersproject/bytes", "npm:5.8.0"],\
+          ["@ethersproject/hash", "npm:5.8.0"],\
+          ["@ethersproject/providers", "npm:5.8.0"],\
+          ["@ethersproject/signing-key", "npm:5.8.0"],\
+          ["@ethersproject/transactions", "npm:5.8.0"],\
+          ["@ethersproject/wallet", "npm:5.8.0"],\
+          ["@irys/arweave", "npm:0.0.2"],\
+          ["@noble/ed25519", "npm:1.7.5"],\
+          ["@randlabs/myalgo-connect", "npm:1.4.2"],\
+          ["algosdk", "npm:1.24.1"],\
+          ["arbundles", "npm:0.11.2"],\
           ["arweave-stream-tx", "virtual:380de38af4152f770a75a7c229b6e20f80e7ee3ef9ea049609fbf13c1c9fee314c8130be409beab785278c8e37614d7446c06edb8fca1b15aa694bde253901b8#npm:1.2.2"],\
           ["base64url", "npm:3.0.1"],\
           ["bs58", "npm:4.0.1"],\
@@ -3160,6 +3185,7 @@ const RAW_RUNTIME_STATE =
           ["@metaplex-foundation/umi-bundle-defaults", "virtual:1331dfab01e91e7053fbcbfbecfc0610afcd171bcbd88cbca8d5c249b3509ae9d329342c68b5d02bce56c303063c0d72a0fe4b109b97ea78a40621fea678ee52#npm:0.9.2"],\
           ["@metaplex-foundation/umi-uploader-irys", "virtual:1331dfab01e91e7053fbcbfbecfc0610afcd171bcbd88cbca8d5c249b3509ae9d329342c68b5d02bce56c303063c0d72a0fe4b109b97ea78a40621fea678ee52#npm:0.9.2"],\
           ["@solana/web3.js", "npm:1.98.2"],\
+          ["arbundles", "npm:0.11.2"],\
           ["axios", "npm:1.10.0"],\
           ["bn.js", "npm:5.2.2"],\
           ["borsh", "npm:0.7.0"],\

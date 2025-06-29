@@ -1,11 +1,9 @@
 # Solana Memecoin Maker
 
-Solana memecoin maker. Video guide: https://www.youtube.com/watch?v=HGX831jDcNw
-
 ### Installation
 Clone repository. 
 ```
-git clone https://github.com/techleadhd/memecoin-maker.git
+git clone https://github.com/moodykhalif23/memecoin-maker.git
 ```
 
 Install dependencies. 
