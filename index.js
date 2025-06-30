@@ -45,18 +45,19 @@ const uploadImage = async () => {
     console.log("Uploading image to Arweave");
     const imageFile = fs.readFileSync("./image.jpg");
     
-    // Check the wallet balance first - using the Solana Web3.js connection
-    // We need to extract the Solana connection from Umi
-    const { Connection } = await import('@solana/web3.js');
-    const connection = new Connection('https://api.mainnet-beta.solana.com');
-    const balance = await connection.getBalance(umi.identity.publicKey);
-    console.log(`Current wallet balance: ${balance / 1e9} SOL`);
+    // Check the wallet balance first using Umi's RPC
+    const balance = await umi.rpc.getBalance(umi.identity.publicKey);
+    console.log(`Current wallet balance: ${Number(balance.basisPoints) / Math.pow(10, balance.decimals)} ${balance.identifier}`);
     
     const uploadPrice = await umi.uploader.getUploadPrice([imageFile]);
     console.log(`Upload price: ${Number(uploadPrice.basisPoints) / Math.pow(10, uploadPrice.decimals)} ${uploadPrice.identifier}`);
     
-    if (balance < Number(uploadPrice.basisPoints) * 1.1) { // Add 10% buffer for transaction fees
-      throw new Error(`Insufficient balance. You need at least ${Number(uploadPrice.basisPoints) / Math.pow(10, uploadPrice.decimals) * 1.1} SOL, but you only have ${balance / 1e9} SOL.`);
+    // Convert both to lamports for comparison
+    const balanceLamports = Number(balance.basisPoints);
+    const priceLamports = Number(uploadPrice.basisPoints);
+    
+    if (balanceLamports < priceLamports * 1.1) { // Add 10% buffer for transaction fees
+      throw new Error(`Insufficient balance. You need at least ${priceLamports / Math.pow(10, balance.decimals) * 1.1} ${balance.identifier}, but you only have ${balanceLamports / Math.pow(10, balance.decimals)} ${balance.identifier}.`);
     }
     
     const imageUris = await umi.uploader.upload([imageFile]);
@@ -70,6 +71,7 @@ const uploadImage = async () => {
       console.error("ERROR: Your wallet doesn't have enough SOL to pay for the upload.");
       console.error("Please fund your wallet with SOL before continuing.");
       console.error(`Wallet address: ${umi.identity.publicKey}`);
+      console.error("You can get free SOL from a faucet for testing on devnet.");
     }
     throw error;
   }
@@ -160,9 +162,9 @@ const mintToken = async (imageUri, metadataUri) => {
 };
 
 const loadUmi = () => {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
+  const umi = createUmi('https://api.devnet.solana.com')
     .use(mplTokenMetadata())
-    .use(irysUploader())
+    .use(irysUploader({ address: "https://node1.irys.xyz" }))
 
   const walletFile = fs.readFileSync('./keypair.json')
   let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(
@@ -178,7 +180,9 @@ const loadUmi = () => {
 // Main execution function
 const main = async () => {
   try {
-    console.log('🚀 Starting Sonko Coin Creation Process...\n');
+    console.log('🚀 Starting Sonko Coin Creation Process...');
+    console.log('📍 Using Solana Devnet for testing');
+    console.log('💡 Run "yarn fund" to get free SOL for testing\n');
     
     // Step 1: Upload image (costs 0.00001 SOL / $0.01)
     console.log('📸 Step 1: Uploading image to Arweave...');
@@ -200,6 +204,7 @@ const main = async () => {
     console.log('   - Add liquidity to DEX (like Raydium, Orca)');
     console.log('   - List on token aggregators');
     console.log('   - Market your coin on social media');
+    console.log('\n⚠️  Note: This was created on Devnet. For mainnet deployment, change the RPC URL in loadUmi()');
     
   } catch (error) {
     console.error('❌ Error during memecoin creation:', error);
