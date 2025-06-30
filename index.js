@@ -71,7 +71,6 @@ const uploadImage = async () => {
       console.error("ERROR: Your wallet doesn't have enough SOL to pay for the upload.");
       console.error("Please fund your wallet with SOL before continuing.");
       console.error(`Wallet address: ${umi.identity.publicKey}`);
-      console.error("You can get free SOL from a faucet for testing on devnet.");
     }
     throw error;
   }
@@ -162,9 +161,9 @@ const mintToken = async (imageUri, metadataUri) => {
 };
 
 const loadUmi = () => {
-  const umi = createUmi('https://api.devnet.solana.com')
+  const umi = createUmi('https://api.mainnet-beta.solana.com')
     .use(mplTokenMetadata())
-    .use(irysUploader({ address: "https://node1.irys.xyz" }))
+    .use(irysUploader())
 
   const walletFile = fs.readFileSync('./keypair.json')
   let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(
@@ -180,9 +179,7 @@ const loadUmi = () => {
 // Main execution function
 const main = async () => {
   try {
-    console.log('🚀 Starting Sonko Coin Creation Process...');
-    console.log('📍 Using Solana Devnet for testing');
-    console.log('💡 Run "yarn fund" to get free SOL for testing\n');
+    console.log('🚀 Starting Sonko Coin Creation Process...\n');
     
     // Step 1: Upload image (costs 0.00001 SOL / $0.01)
     console.log('📸 Step 1: Uploading image to Arweave...');
@@ -204,7 +201,6 @@ const main = async () => {
     console.log('   - Add liquidity to DEX (like Raydium, Orca)');
     console.log('   - List on token aggregators');
     console.log('   - Market your coin on social media');
-    console.log('\n⚠️  Note: This was created on Devnet. For mainnet deployment, change the RPC URL in loadUmi()');
     
   } catch (error) {
     console.error('❌ Error during memecoin creation:', error);
