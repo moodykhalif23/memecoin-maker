@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "node --experimental-loader=./csv-parse-resolver.mjs index.js",
-    "keygen": "node keygen.js"
+    "keygen": "node keygen.js",
+    "verify": "node verify-wallet.js"
   },
   "name": "memecoin-maker",
   "version": "1.0.0",
