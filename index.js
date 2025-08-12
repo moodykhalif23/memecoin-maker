@@ -22,7 +22,6 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 
-// Apply CSV-parse module patch if needed
 try {
   // This is just a check to see if the module is already patched
   require('@irys/sdk/build/esm/node/upload.js');
@@ -120,7 +119,7 @@ const mintToken = async (imageUri, metadataUri) => {
     ataProgram: getSplAssociatedTokenProgramId(umi),
   });
 
-  // The final instruction (if required) is to mint the tokens to the token account in the previous ix.
+  // The final instruction is to mint the tokens to the token account in the previous ix.
   const mintTokensIx = mintTokensTo(umi, {
     mint: mintSigner.publicKey,
     token: findAssociatedTokenPda(umi, {
@@ -207,5 +206,4 @@ const main = async () => {
   }
 };
 
-// Run the main function
 main();
