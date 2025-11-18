@@ -82,7 +82,7 @@ const uploadMetadata = async (imageUri) => {
   const metadata = {
     name: coinName,
     symbol: coinSymbol,
-    description: "The ultimate memecoin for the sonko community! Join the revolution and ride the wave to the moon! 🚀",
+    description: "The ultimate memecoin for the kenyan community! Join the revolution and ride the wave to the moon! 🚀",
     image: imageUri,
     "twitter": "https://x.com/LYNGrind",
   };
